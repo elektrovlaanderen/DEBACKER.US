@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="American style sportportretten – 2 poses per speler, ±5 min, geen voorafbetaling. Jeugd-proof privacy." />
+  <title>American Style Sportportretten | Snapwithus360</title>
+  <style>
+    :root{
+      --bg:#07090d;
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.62);
+      --hair:rgba(255,255,255,.10);
+      --max:980px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 18% 12%, rgba(255,255,255,.10), transparent 62%),
+        radial-gradient(900px 520px at 82% 18%, rgba(255,255,255,.08), transparent 60%),
+        linear-gradient(180deg, #05060a 0%, var(--bg) 48%, #05060a 100%);
+      line-height:1.55;
+    }
+
+    a{color:inherit; text-decoration:none}
+    a.underline{text-decoration:underline; text-underline-offset:3px}
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 22px 40px}
+
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding: 6px 0 28px;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 240px;
+    }
+    .mark{
+      width:10px; height:10px; border-radius:999px;
+      background:rgba(255,255,255,.92);
+      box-shadow:0 0 0 7px rgba(255,255,255,.08);
+      flex: 0 0 auto;
+    }
+    .brand b{letter-spacing:.2px}
+    .brand small{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+
+    .top{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+
+    .link{
+      color:var(--muted);
+      font-weight:750;
+      font-size:13px;
+      padding:8px 0;
+    }
+    .link:hover{color:var(--text)}
+
+    .lang{display:inline-flex; gap:8px; align-items:center}
+    .lang button{
+      border:0; background:transparent; cursor:pointer;
+      color:var(--muted);
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:.12em;
+      padding:6px 8px;
+      border-radius:999px;
+    }
+    .lang button.active{color:var(--text); background:rgba(255,255,255,.10)}
+
+    .hero{padding: 18px 0 8px}
+
+    h1{
+      margin:0;
+      font-size: clamp(34px, 5.6vw, 64px);
+      letter-spacing:-1.2px;
+      line-height:1.0;
+    }
+
+    .lead{
+      margin: 14px 0 0;
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    .meta{
+      margin: 18px 0 0;
+      display:flex; gap:14px; flex-wrap:wrap;
+      color: var(--text);
+      font-weight: 850;
+      font-size: 13px;
+    }
+    .meta span{color:var(--muted); font-weight:750}
+
+    .cta{
+      margin-top: 18px;
+      display:flex; gap:14px; flex-wrap:wrap;
+      align-items:center;
+    }
+    .cta a{
+      font-weight: 950;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .cta a:hover{text-decoration:underline; text-underline-offset:4px}
+
+    .hairline{height:1px; background:var(--hair); margin: 26px 0}
+
+    main{padding: 0}
+
+    section{padding: 6px 0}
+    h2{margin:0 0 10px; font-size: 16px; letter-spacing:.2px}
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr; gap:18px}
+      header{align-items:flex-start}
+    }
+
+    .lines{display:flex; flex-direction:column; gap:8px; color:var(--muted)}
+    .line{display:flex; gap:10px; align-items:baseline; justify-content:space-between}
+    .line b{color:var(--text); font-size:14px; font-weight:900}
+    .line i{font-style:normal}
+
+    ul{margin:0; padding-left:18px; color:var(--muted)}
+    li{margin:8px 0}
+
+    details{margin-top: 10px}
+    summary{cursor:pointer; font-weight:900; color: var(--text)}
+    details .fine{color:var(--muted); font-size:13px; margin-top:8px}
+
+    .video{
+      width:100%;
+      aspect-ratio: 16/9;
+      background: rgba(0,0,0,.25);
+      border-radius: 16px;
+      overflow:hidden;
+    }
+    .video iframe, .video video{width:100%; height:100%; border:0}
+
+    .note{color:var(--muted); font-size:13px; margin-top:10px}
+
+    footer{margin-top: 28px; color:var(--muted); font-size:13px}
+
+    /* Language blocks */
+    [data-lang]{display:none}
+    [data-lang].show{display:block}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="brand" aria-label="Snapwithus360">
+        <span class="mark" aria-hidden="true"></span>
+        <div>
+          <b>Snapwithus360</b>
+          <small>American style sportportretten</small>
+        </div>
+      </div>
+
+      <div class="top">
+        <a class="link" href="https://snapwithus360.com" target="_blank" rel="noreferrer">snapwithus360.com</a>
+        <a class="link" href="https://instagram.com/snapwithus360" target="_blank" rel="noreferrer">@snapwithus360</a>
+        <div class="lang" role="group" aria-label="Language toggle">
+          <button id="btn-nl" class="active" type="button">NL</button>
+          <button id="btn-en" type="button">EN</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="hero">
+      <div data-lang="nl" class="show">
+        <h1>2 poses.<br>5 minuten.<br>Pro look.</h1>
+        <p class="lead">Jeugdshoot in Amerikaanse stijl. <b>Geen voorafbetaling</b>: gewoon komen, meedoen en pas achteraf beslissen of je digitale foto’s en/of prints wil aankopen.</p>
+        <div class="meta">
+          <div>2 poses <span>per speler</span></div>
+          <div>± 5 min <span>per speler</span></div>
+          <div>€ 25 <span>per digitale foto</span></div>
+        </div>
+        <div class="cta">
+          <a href="#praktisch">Praktisch</a>
+          <a href="#kopen">Bestellen</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#video">Video</a>
+        </div>
+      </div>
+
+      <div data-lang="en">
+        <h1>2 poses.<br>5 minutes.<br>Pro look.</h1>
+        <p class="lead">Youth portraits in an American-style look. <b>No upfront payment</b>: show up, take part, and decide afterwards if you want to buy digital images and/or prints.</p>
+        <div class="meta">
+          <div>2 poses <span>per player</span></div>
+          <div>~ 5 min <span>per player</span></div>
+          <div>€ 25 <span>per digital image</span></div>
+        </div>
+        <div class="cta">
+          <a href="#praktisch">Practical</a>
+          <a href="#kopen">Ordering</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#video">Video</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hairline"></div>
+
+    <main>
+      <div class="grid">
+
+        <section id="praktisch">
+          <div data-lang="nl" class="show">
+            <h2>Praktisch</h2>
+            <div class="lines">
+              <div class="line"><b>Datum</b><i>[VULT CLUB IN]</i></div>
+              <div class="line"><b>Locatie</b><i>[VULT CLUB IN]</i></div>
+              <div class="line"><b>Timing per leeftijd</b><i>[VOLGT / VULT CLUB IN]</i></div>
+            </div>
+            <div class="hairline"></div>
+            <ul>
+              <li>Wedstrijdtenue/cluboutfit: proper en volledig.</li>
+              <li>Gelieve op tijd te zijn: we werken met een strak schema.</li>
+            </ul>
+          </div>
+
+          <div data-lang="en">
+            <h2>Practical</h2>
+            <div class="lines">
+              <div class="line"><b>Date</b><i>[CLUB FILLS IN]</i></div>
+              <div class="line"><b>Location</b><i>[CLUB FILLS IN]</i></div>
+              <div class="line"><b>Time per age group</b><i>[TBD / CLUB FILLS IN]</i></div>
+            </div>
+            <div class="hairline"></div>
+            <ul>
+              <li>Match kit/club outfit: clean and complete.</li>
+              <li>Please be on time: we run a tight schedule.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="kopen">
+          <div data-lang="nl" class="show">
+            <h2>Bestellen (na de shoot)</h2>
+            <ul>
+              <li>Er komt <b>één galerij per ploeg</b> via ShootProof.</li>
+              <li>Je koopt enkel wat je wil: <b>digitaal</b> en/of <b>prints</b>.</li>
+            </ul>
+            <div class="hairline"></div>
+            <div class="lines">
+              <div class="line"><b>Digitaal (Full Resolution)</b><i>€ 25,00 per gekozen foto</i></div>
+              <div class="line"><b>Prints</b><i>vanaf € 22,00 (zie galerij)</i></div>
+            </div>
+            <details>
+              <summary>Toon printprijzen (overzicht)</summary>
+              <div class="fine">
+                <div style="margin-top:8px"><b>Prints (Lustre/Gloss)</b></div>
+                10×15 €22 — 13×18 €28 — 15×20 €28 — 20×25 €32 — 20×30 €33 — 25×25 €29 — 28×36 €30 — 40×50 €40 — 50×75 €60
+                <div style="margin-top:10px"><b>Fine Art</b></div>
+                A4 €40 — A3 €50 — 13×13 €30 — 25×25 €40 — 10×15 €32 — 13×18 €33 — 15×20 €36 — 20×25 €38 — 30×46 €56 — 41×61 €65
+                <div style="margin-top:10px"><b>Metal (High Gloss)</b></div>
+                20×25 €145 — 25×25 €150 — 40×50 €225 — 40×60 €250
+                <div style="margin-top:10px">Fine Art paper options: Fuji Fine Art Museum Rough 300gsm / Hahnemuhle William Turner 190gsm.</div>
+              </div>
+            </details>
+          </div>
+
+          <div data-lang="en">
+            <h2>Ordering (after the shoot)</h2>
+            <ul>
+              <li>There will be <b>one gallery per team</b> via ShootProof.</li>
+              <li>You buy only what you want: <b>digital</b> and/or <b>prints</b>.</li>
+            </ul>
+            <div class="hairline"></div>
+            <div class="lines">
+              <div class="line"><b>Digital (Full Resolution)</b><i>€ 25.00 per selected image</i></div>
+              <div class="line"><b>Prints</b><i>from € 22.00 (see gallery)</i></div>
+            </div>
+            <details>
+              <summary>Show print prices (summary)</summary>
+              <div class="fine">
+                <div style="margin-top:8px"><b>Prints (Lustre/Gloss)</b></div>
+                10×15 €22 — 13×18 €28 — 15×20 €28 — 20×25 €32 — 20×30 €33 — 25×25 €29 — 28×36 €30 — 40×50 €40 — 50×75 €60
+                <div style="margin-top:10px"><b>Fine Art</b></div>
+                A4 €40 — A3 €50 — 13×13 €30 — 25×25 €40 — 10×15 €32 — 13×18 €33 — 15×20 €36 — 20×25 €38 — 30×46 €56 — 41×61 €65
+                <div style="margin-top:10px"><b>Metal (High Gloss)</b></div>
+                20×25 €145 — 25×25 €150 — 40×50 €225 — 40×60 €250
+                <div style="margin-top:10px">Fine Art paper options: Fuji Fine Art Museum Rough 300gsm / Hahnemuhle William Turner 190gsm.</div>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <section id="privacy">
+          <div data-lang="nl" class="show">
+            <h2>Privacy (jeugd)</h2>
+            <ul>
+              <li>Galerij is <b>wachtwoordbeveiligd</b> en bedoeld voor ouders/spelers van de ploeg.</li>
+              <li>Deel link/wachtwoord niet publiek (geen sociale media, geen openbare groepen).</li>
+              <li>Labeling met <b>rugnummer/voornaam</b> (geen volledige namen).</li>
+              <li>Gebruik door Snapwithus360 op website/social media: <b>enkel met toestemming</b>.</li>
+            </ul>
+          </div>
+
+          <div data-lang="en">
+            <h2>Privacy (youth)</h2>
+            <ul>
+              <li>Gallery is <b>password-protected</b> for team parents/players only.</li>
+              <li>Please do not share link/password publicly (no social media, no public groups).</li>
+              <li>Labels use <b>jersey number/first name</b> (no full names).</li>
+              <li>Any use by Snapwithus360 on website/social media: <b>only with consent</b>.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="video">
+          <div data-lang="nl" class="show">
+            <h2>Video</h2>
+            <div class="video" aria-label="Promo video">
+              <!-- Optie A: YouTube/Vimeo embed (vervang VIDEO_ID) -->
+              <!-- <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Promo video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
+              <!-- Optie B: eigen MP4 (upload promo.mp4 in dezelfde map) -->
+              <video controls playsinline preload="metadata">
+                <source src="promo.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p class="note">Vervang <b>promo.mp4</b> door je eigen video, of gebruik een YouTube/Vimeo embed.</p>
+          </div>
+
+          <div data-lang="en">
+            <h2>Video</h2>
+            <div class="video" aria-label="Promo video">
+              <!-- Option A: YouTube/Vimeo embed (replace VIDEO_ID) -->
+              <!-- <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Promo video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
+              <!-- Option B: MP4 upload (place promo.mp4 in the same folder) -->
+              <video controls playsinline preload="metadata">
+                <source src="promo.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p class="note">Replace <b>promo.mp4</b> with your video, or use a YouTube/Vimeo embed.</p>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="hairline"></div>
+
+      <section>
+        <div data-lang="nl" class="show">
+          <h2>Deel deze pagina</h2>
+          <p class="lead" style="margin-top:0">Stuur één link in WhatsApp/TeamApp. Datum/uur kan later aangevuld worden zonder nieuwe flyer.</p>
+        </div>
+        <div data-lang="en">
+          <h2>Share this page</h2>
+          <p class="lead" style="margin-top:0">Send one link in WhatsApp/TeamApp. Date/time can be updated later without a new flyer.</p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      © <span id="year"></span> Snapwithus360 • <a class="underline" href="https://snapwithus360.com" target="_blank" rel="noreferrer">snapwithus360.com</a> • <a class="underline" href="https://instagram.com/snapwithus360" target="_blank" rel="noreferrer">@snapwithus360</a>
+    </footer>
+
+  </div>
+
+  <script>
+    const nlBtn = document.getElementById('btn-nl');
+    const enBtn = document.getElementById('btn-en');
+    const blocks = Array.from(document.querySelectorAll('[data-lang]'));
+
+    function setLang(lang){
+      blocks.forEach(b => b.classList.toggle('show', b.getAttribute('data-lang') === lang));
+      nlBtn.classList.toggle('active', lang === 'nl');
+      enBtn.classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang;
+      try{ localStorage.setItem('sw360_lang', lang); }catch(e){}
+    }
+
+    nlBtn.addEventListener('click', () => setLang('nl'));
+    enBtn.addEventListener('click', () => setLang('en'));
+
+    const saved = (() => { try { return localStorage.getItem('sw360_lang'); } catch(e){ return null; } })();
+    setLang(saved === 'en' ? 'en' : 'nl');
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
