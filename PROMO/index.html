@@ -42,11 +42,16 @@
       display:flex; align-items:center; gap:12px;
       min-width: 240px;
     }
-    .mark{
-      width:10px; height:10px; border-radius:999px;
-      background:rgba(255,255,255,.92);
-      box-shadow:0 0 0 7px rgba(255,255,255,.08);
-      flex: 0 0 auto;
+    .clublogo{
+      height: 34px;
+      width: auto;
+      display:block;
+    }
+    .sep{
+      width:1px;
+      height: 28px;
+      background: var(--hair);
+      opacity:.9;
     }
     .brand b{letter-spacing:.2px}
     .brand small{display:block; color:var(--muted); font-size:12px; margin-top:2px}
@@ -164,10 +169,12 @@
 
     <header>
       <div class="brand" aria-label="Snapwithus360">
-        <span class="mark" aria-hidden="true"></span>
+        <!-- Place condors-web-geel.svg in the same folder as this HTML (PROMO/) -->
+        <img class="clublogo" src="condors-web-geel.svg" alt="Koninklijke Sint-Niklase Condors" />
+        <span class="sep" aria-hidden="true"></span>
         <div>
           <b>Snapwithus360</b>
-          <small>American style sportportretten</small>
+          <small>American style sportportretten • Koninklijke Sint-Niklase Condors</small>
         </div>
       </div>
 
@@ -186,6 +193,7 @@
         <h1>2 poses.<br>5 minuten.<br>Pro look.</h1>
         <p class="lead">Jeugdshoot in Amerikaanse stijl. <b>Geen voorafbetaling</b>: gewoon komen, meedoen en pas achteraf beslissen of je digitale foto’s en/of prints wil aankopen.</p>
         <div class="meta">
+          <div>Voor <span>Koninklijke Sint-Niklase Condors</span></div>
           <div>2 poses <span>per speler</span></div>
           <div>± 5 min <span>per speler</span></div>
           <div>€ 25 <span>per digitale foto</span></div>
@@ -202,6 +210,7 @@
         <h1>2 poses.<br>5 minutes.<br>Pro look.</h1>
         <p class="lead">Youth portraits in an American-style look. <b>No upfront payment</b>: show up, take part, and decide afterwards if you want to buy digital images and/or prints.</p>
         <div class="meta">
+          <div>For <span>Koninklijke Sint-Niklase Condors</span></div>
           <div>2 poses <span>per player</span></div>
           <div>~ 5 min <span>per player</span></div>
           <div>€ 25 <span>per digital image</span></div>
