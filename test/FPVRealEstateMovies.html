@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="nl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPV & Drone Visuals - Snapwithus360</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-[#b8965f] selection:text-white flex flex-col min-h-screen">
+
+    <div id="languageModal" class="fixed inset-0 bg-gray-950 bg-opacity-90 z-[100] hidden flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full text-center">
+            <h2 class="text-2xl font-bold mb-6 text-gray-900">Kies uw regio / Choose region</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <button id="btnLangNL" class="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-[#b8965f] hover:bg-zinc-50 transition duration-300 group">
+                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">🇧🇪</span>
+                    <span class="font-semibold text-gray-900 group-hover:text-[#b8965f] transition-colors">Nederlands</span>
+                    <span class="text-sm text-gray-500">België</span>
+                </button>
+                <button id="btnLangEN" class="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-[#b8965f] hover:bg-zinc-50 transition duration-300 group">
+                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">🇺🇸</span>
+                    <span class="font-semibold text-gray-900 group-hover:text-[#b8965f] transition-colors">English</span>
+                    <span class="text-sm text-gray-500">USA</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bg-white/95 backdrop-blur-md shadow-sm fixed w-full z-50 top-0 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="assets/logo.png" alt="Snapwithus360 Logo" class="h-12 w-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=Snapwithus360';">
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#home" class="text-gray-900 hover:text-[#b8965f] font-medium transition">Home</a>
+                    
+                    <div class="relative group">
+                        <button class="text-[#b8965f] font-medium transition flex items-center pb-8 pt-8">
+                            Services <i class="fa-solid fa-chevron-down ml-2 text-xs"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-64 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 rounded-b-lg overflow-hidden">
+                            <a href="realestatephoto.html" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">Real Estate Photography</a>
+                            <a href="FPVRealEstateMovies.html" class="block px-5 py-3 text-sm text-[#b8965f] bg-zinc-50 border-b border-gray-50 font-semibold">FPV Real Estate Movies</a>
+                            <a href="index.html#services" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">Matterport 3D Scans</a>
+                            <a href="index.html#services" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">Vloerplannen</a>
+                            <a href="index.html#sport" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">Sportportretten</a>
+                            <a href="#" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f]">Brochure Sportfotografie (PDF)</a>
+                        </div>
+                    </div>
+
+                    <a href="referenties.html" class="text-gray-900 hover:text-[#b8965f] font-medium transition">Referenties</a>
+                    <a href="contact.html" class="bg-gray-900 text-white px-6 py-2.5 rounded-md hover:bg-[#b8965f] transition duration-300 font-medium tracking-wide">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 bg-gray-950 flex items-center justify-center border-b-4 border-[#b8965f]">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1506126279646-a697353d3166?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Drone View Vastgoed" class="w-full h-full object-cover opacity-40">
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 tracking-tight">
+                FPV & Drone visuals
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed font-light mb-8">
+                Laat je listing of project opvallen met krachtige aerial shots, video en FPV — snel geleverd en klaar voor online.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-[#b8965f] text-xs font-bold uppercase tracking-widest block mb-3">Drone fotografie & videografie</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">Sterke aerial beelden die meteen vertrouwen geven</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Dronebeelden geven je listing onmiddellijk meer impact. Ideaal om het volledige perceel, de omgeving en unieke selling points in één oogopslag te tonen.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Wij focussen op strakke composities, consistente nabewerking en beelden die onmiddellijk inzetbaar zijn voor listings, socials en advertising.
+                    </p>
+                    <a href="contact.html" class="inline-flex items-center text-sm font-bold uppercase tracking-widest text-[#b8965f] hover:text-gray-900 transition group">
+                        Vraag info <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-200 relative group">
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Drone View" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-zinc-50 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 rounded-xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-200 relative group">
+                    <img src="https://images.unsplash.com/photo-1522050212171-61b01dd24579?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Aerial views" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                </div>
+                <div class="order-1 lg:order-2">
+                    <span class="text-[#b8965f] text-xs font-bold uppercase tracking-widest block mb-3">Meer bereik. Meer clicks.</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">Laat je pand eruit springen op elke website en op socials</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Aerial foto’s en video maken je presentatie completer: ligging, buurt, achterliggende natuur, toegang, privacy en schaal worden veel duidelijker dan met enkel interieurfoto’s.
+                    </p>
+                    <div class="bg-white border-l-4 border-[#b8965f] p-5 mb-8 shadow-sm">
+                        <p class="text-gray-900 font-semibold">
+                            En ja: <span class="text-[#b8965f]">24-uur levering</span> of het is GRATIS (conform afspraak).
+                        </p>
+                    </div>
+                    <a href="#pricing" class="inline-flex items-center text-sm font-bold uppercase tracking-widest text-[#b8965f] hover:text-gray-900 transition group">
+                        Bekijk prijzen <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-[#b8965f] text-xs font-bold uppercase tracking-widest block mb-3">Voor elk type pand</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">Toon de omgeving, schaal en ligging in één sterke reeks</h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Dronebeelden zijn vooral sterk wanneer “ruimte” en “omgeving” mee verkopen. Denk aan:
+                    </p>
+                    
+                    <ul class="space-y-4 mb-10 text-gray-700 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-[#b8965f] text-lg mr-4 mt-0.5"></i> 
+                            <span><strong>Wijdse views:</strong> toon de setting en omgeving in één shot.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-[#b8965f] text-lg mr-4 mt-0.5"></i> 
+                            <span><strong>Grote percelen & bijgebouwen:</strong> alles zichtbaar, netjes in context.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-[#b8965f] text-lg mr-4 mt-0.5"></i> 
+                            <span><strong>Proximity:</strong> winkels, scholen, natuur of hotspots in de buurt.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-[#b8965f] text-lg mr-4 mt-0.5"></i> 
+                            <span><strong>Meerdere hoogtes:</strong> architectuur en indeling van bovenaf.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-[#b8965f] text-lg mr-4 mt-0.5"></i> 
+                            <span><strong>Hellend terrein:</strong> uitdagingen omzetten in “wow”-beelden.</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="contact.html" class="inline-block bg-gray-900 text-white px-8 py-3.5 rounded-md text-sm font-bold hover:bg-[#b8965f] transition duration-300 shadow-md">Plan een shoot &rarr;</a>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Drone Villa" class="w-full h-full object-cover rounded-lg shadow-md aspect-square">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Drone Suburbs" class="w-full h-full object-cover rounded-lg shadow-md aspect-square mt-8">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gray-950 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Hoe plaats je een opdracht?</h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-lg">
+                    <span class="text-[#b8965f] font-semibold">24-uur levering</span> of het is GRATIS (conform afspraak).
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <div class="hidden md:block absolute top-8 left-[12%] right-[12%] h-[1px] bg-gray-800 z-0"></div>
+                
+                <div class="relative z-10 text-center">
+                    <div class="w-16 h-16 mx-auto bg-gray-900 text-[#b8965f] rounded-full flex items-center justify-center text-xl font-bold mb-6 shadow-xl border-4 border-gray-950">1</div>
+                    <h3 class="text-lg font-bold mb-3 text-white">Vraag je shoot aan</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Stuur ons het adres, type pand en gewenste diensten. (Eventueel met extra instructies.)</p>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="w-16 h-16 mx-auto bg-gray-900 text-[#b8965f] rounded-full flex items-center justify-center text-xl font-bold mb-6 shadow-xl border-4 border-gray-950">2</div>
+                    <h3 class="text-lg font-bold mb-3 text-white">Wij stemmen alles af</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">We finetunen timing, shots en deliverables zodat alles perfect matcht met je listing.</p>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="w-16 h-16 mx-auto bg-gray-900 text-[#b8965f] rounded-full flex items-center justify-center text-xl font-bold mb-6 shadow-xl border-4 border-gray-950">3</div>
+                    <h3 class="text-lg font-bold mb-3 text-white">Shoot op locatie</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Wij komen ter plaatse en leggen de aerial foto’s en/of video vast in de juiste stijl.</p>
+                </div>
+                <div class="relative z-10 text-center">
+                    <div class="w-16 h-16 mx-auto bg-gray-900 text-[#b8965f] rounded-full flex items-center justify-center text-xl font-bold mb-6 shadow-xl border-4 border-gray-950">4</div>
+                    <h3 class="text-lg font-bold mb-3 text-white">Oplevering in 24u</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Je ontvangt de afgewerkte beelden snel via downloadlink — klaar voor online.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-24 bg-zinc-50 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-[#b8965f] text-xs font-bold uppercase tracking-widest block mb-2">Transparante tarieven</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Drone foto & video pricing</h2>
+                <p class="text-gray-500">Alle prijzen zijn € incl. btw.</p>
+            </div>
+
+            <div class="bg-white text-gray-900 rounded-2xl shadow-xl overflow-hidden relative border-t-8 border-[#b8965f]">
+                
+                <div class="p-8 md:p-12">
+                    <div class="flex justify-between items-end mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900">Aerial Photo & Video</h3>
+                        <span class="bg-gray-900 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-sm shadow-sm">Populair</span>
+                    </div>
+
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex justify-between items-center border-b border-gray-100 pb-3">
+                            <span class="font-medium text-gray-700">Aerial photos <span class="text-gray-400 text-xs ml-1 font-normal">(8 foto’s)</span></span>
+                            <span class="font-bold text-lg text-gray-900">€195</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-100 pb-3">
+                            <span class="font-medium text-gray-700">Aerial photos add-on* <span class="text-gray-400 text-xs ml-1 font-normal">(8 foto’s)</span></span>
+                            <span class="font-bold text-lg text-gray-900">€195</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-100 pb-3">
+                            <span class="font-medium text-gray-700">Aerial video <span class="text-gray-400 text-xs ml-1 font-normal">(1–2 minuten)</span></span>
+                            <span class="font-bold text-lg text-gray-900">€245</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-100 pb-3">
+                            <span class="font-medium text-gray-700">Aerial video add-on* <span class="text-gray-400 text-xs ml-1 font-normal">(15–30 seconden)</span></span>
+                            <span class="font-bold text-lg text-gray-900">€145</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-100 pb-3">
+                            <span class="font-medium text-gray-700">Aerial virtual twilight <span class="text-gray-400 text-xs ml-1 font-normal">(per beeld)</span></span>
+                            <span class="font-bold text-lg text-gray-900">€50</span>
+                        </li>
+                    </ul>
+
+                    <p class="text-xs text-gray-400 mb-8 italic">* Add-on items zijn bedoeld als aanvulling op een on-site shoot (foto of video).</p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                        <a href="contact.html" class="inline-block text-center bg-gray-900 text-white px-8 py-3.5 rounded-md font-bold hover:bg-[#b8965f] transition duration-300 shadow-md">
+                            Offerte aanvragen
+                        </a>
+                        <a href="#addons" class="inline-block text-center border border-gray-300 text-gray-900 px-8 py-3.5 rounded-md font-bold hover:border-gray-900 hover:bg-gray-50 transition duration-300">
+                            Bekijk add-ons &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="addons" class="py-24 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Favorite add-ons</h2>
+                <p class="text-gray-600">Maak je presentatie compleet met deze populaire extra’s.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 shadow-sm flex flex-col hover:border-[#b8965f] transition duration-300 group">
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Virtual Twilight</h3>
+                    <p class="text-[#b8965f] font-bold mb-6">vanaf €50</p>
+                    <ul class="space-y-3 mb-8 text-sm text-gray-600 flex-grow">
+                        <li><i class="fa-solid fa-check text-[#b8965f] mr-2"></i> Luxere “evening look”</li>
+                        <li><i class="fa-solid fa-check text-[#b8965f] mr-2"></i> Perfect voor premium listings</li>
+                        <li><i class="fa-solid fa-check text-[#b8965f] mr-2"></i> Per beeld</li>
+                    </ul>
+                    <a href="contact.html" class="w-full block text-center border border-gray-300 text-gray-900 py-3 rounded-md font-semibold hover:border-gray-900 hover:bg-white transition">Offerte aanvragen</a>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl border-2 border-[#b8965f] shadow-lg flex flex-col relative transform -translate-y-2">
+                    <div class="absolute top-0 right-0 bg-[#b8965f] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-bl-lg">Populair</div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Cinematic Video Tours</h3>
+                    <p class="text-[#b8965f] font-bold mb-6">vanaf €250</p>
+                    <ul class="space-y-3 mb-8 text-sm text-gray-600 flex-grow">
+                        <li><i class="fa-solid fa-check text-[#b8965f] mr-2"></i> Video voor socials & listing</li>
+                        <li><i class="fa-solid fa-check text-[#b8965f] mr-2"></i> Professionele montage</li>
+                        <li><i class="fa-solid fa-check text-[#b8965f] mr-2"></i> Combineerbaar met FPV</li>
+                    </ul>
+                    <a href="contact.html" class="w-full block text-center bg-[#b8965f] text-white py-3 rounded-md font-bold hover:bg-[#a3834f] transition shadow-md">Offerte aanvragen</a>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 shadow-sm flex flex-col hover:border-[#b8965f] transition duration-300 group">
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Lifestyle Video</h3>
+                    <p class="text-[#b8965f] font-bold mb-6">vanaf €250</p>
+                    <ul class="space-y-3 mb-8 text-sm text-gray-600 flex-grow">
+                        <li><i class="fa-solid fa-check text-[#b8965f] mr-2"></i> Meer “gevoel” in je content</li>
+                        <li><i class="fa-solid fa-check text-[#b8965f] mr-2"></i> Ideaal voor branding</li>
+                        <li><i class="fa-solid fa-check text-[#b8965f] mr-2"></i> Story-driven shots</li>
+                    </ul>
+                    <a href="contact.html" class="w-full block text-center border border-gray-300 text-gray-900 py-3 rounded-md font-semibold hover:border-gray-900 hover:bg-white transition">Offerte aanvragen</a>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 shadow-sm flex flex-col hover:border-[#b8965f] transition duration-300 group">
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Agent Interview</h3>
+                    <p class="text-[#b8965f] font-bold mb-6">vanaf €250</p>
+                    <ul class="space-y-3 mb-8 text-sm text-gray-600 flex-grow">
+                        <li><i class="fa-solid fa-check text-[#b8965f] mr-2"></i> Korte intro on-camera</li>
+                        <li><i class="fa-solid fa-check text-[#b8965f] mr-2"></i> Meer vertrouwen & conversie</li>
+                        <li><i class="fa-solid fa-check text-[#b8965f] mr-2"></i> Perfect voor socials</li>
+                    </ul>
+                    <a href="contact.html" class="w-full block text-center border border-gray-300 text-gray-900 py-3 rounded-md font-semibold hover:border-gray-900 hover:bg-white transition">Offerte aanvragen</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-950 text-center border-t border-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-8">Klaar om je listing te laten opvallen?</h2>
+            <a href="contact.html" class="inline-block bg-[#b8965f] text-white px-10 py-4 rounded-md font-bold hover:bg-[#a3834f] transition duration-300 shadow-lg tracking-wide text-lg">
+                Plan je drone/FPV shoot &rarr;
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-gray-950 text-gray-400 py-16 mt-auto border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mb-16">
+                <div class="space-y-6">
+                    <h4 class="text-white text-2xl font-bold tracking-tight">Snapwithus<span class="text-[#b8965f]">360</span></h4>
+                    <p class="text-sm leading-relaxed text-gray-400 max-w-sm">
+                        De specialist in innovatieve beeldtechnologie voor vastgoed, architectuur en sport. Wij brengen jouw visie virtueel tot leven met ongeëvenaarde precisie.
+                    </p>
+                </div>
+                <div class="md:mx-auto">
+                    <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-6">Navigatie</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li>
+                            <a href="index.html#home" class="hover:text-white transition-colors duration-300 flex items-center group">
+                                <i class="fa-solid fa-angle-right text-[10px] mr-3 text-[#b8965f] group-hover:translate-x-1 transition-transform"></i> Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#services" class="hover:text-white transition-colors duration-300 flex items-center group">
+                                <i class="fa-solid fa-angle-right text-[10px] mr-3 text-[#b8965f] group-hover:translate-x-1 transition-transform"></i> Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="referenties.html" class="hover:text-white transition-colors duration-300 flex items-center group">
+                                <i class="fa-solid fa-angle-right text-[10px] mr-3 text-[#b8965f] group-hover:translate-x-1 transition-transform"></i> Referenties
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="hover:text-white transition-colors duration-300 flex items-center group">
+                                <i class="fa-solid fa-angle-right text-[10px] mr-3 text-[#b8965f] group-hover:translate-x-1 transition-transform"></i> Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:ml-auto">
+                    <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-6">Contact</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-location-dot mt-1 w-6 text-[#b8965f]"></i> 
+                            <span>Vijfstraten 163<br>9100 Sint-Niklaas</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-phone w-6 text-[#b8965f]"></i> 
+                            <a href="tel:+32476611099" class="hover:text-white transition-colors duration-300">+32 476 61 10 99</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-envelope w-6 text-[#b8965f]"></i> 
+                            <a href="mailto:tom@snapwithus360.com" class="hover:text-white transition-colors duration-300">tom@snapwithus360.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800/60 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500">
+                <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
+                    <p>&copy; 2026 Snapwithus360.com</p>
+                    <span class="hidden sm:inline text-gray-700">|</span>
+                    <p>
+                        Made by <a href="https://consultyx.be" target="_blank" rel="noopener noreferrer" class="text-[#b8965f] font-medium hover:text-white transition-colors duration-300 ml-1">Consultyx</a>
+                    </p>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="hover:text-white transition-colors duration-300">Privacybeleid</a>
+                    <a href="#" class="hover:text-white transition-colors duration-300">Algemene voorwaarden</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 bg-gray-950 text-gray-300 border-t border-gray-800 p-6 z-[90] shadow-[0_-10px_40px_rgba(0,0,0,0.3)] transform translate-y-full transition-transform duration-500 ease-in-out">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-sm leading-relaxed">
+                <p>Wij gebruiken cookies om uw ervaring op onze website te verbeteren. 
+                   Door op "Accepteren" te klikken, gaat u akkoord. 
+                   <a href="#" class="text-[#b8965f] font-medium hover:underline">Lees ons privacybeleid</a>.</p>
+            </div>
+            <div class="flex space-x-3 whitespace-nowrap shrink-0">
+                <button id="btnDeclineCookies" class="px-5 py-2.5 border border-gray-700 text-gray-400 rounded-md text-sm font-medium hover:bg-gray-800 hover:text-white transition">Weigeren</button>
+                <button id="btnAcceptCookies" class="px-5 py-2.5 bg-[#b8965f] text-white rounded-md text-sm font-bold hover:bg-[#a3834f] transition shadow-lg">Accepteren</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

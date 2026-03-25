@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="nl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snapwithus360 - Real Estate Visual Specialist</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-[#b8965f] selection:text-white">
+
+    <div id="languageModal" class="fixed inset-0 bg-gray-950 bg-opacity-90 z-[100] hidden flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full text-center">
+            <h2 class="text-2xl font-bold mb-6 text-gray-900">Kies uw regio / Choose region</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <button id="btnLangNL" class="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-[#b8965f] hover:bg-zinc-50 transition duration-300 group">
+                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">🇧🇪</span>
+                    <span class="font-semibold text-gray-900 group-hover:text-[#b8965f] transition-colors">Nederlands</span>
+                    <span class="text-sm text-gray-500">België</span>
+                </button>
+                <button id="btnLangEN" class="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-[#b8965f] hover:bg-zinc-50 transition duration-300 group">
+                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">🇺🇸</span>
+                    <span class="font-semibold text-gray-900 group-hover:text-[#b8965f] transition-colors">English</span>
+                    <span class="text-sm text-gray-500">USA</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bg-white/95 backdrop-blur-md shadow-sm fixed w-full z-50 top-0 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="#home">
+                        <img src="assets/logo.png" alt="Snapwithus360 Logo" class="h-12 w-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=Snapwithus360';">
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-900 hover:text-[#b8965f] font-medium transition">Home</a>
+                    
+                    <div class="relative group">
+                        <button class="text-gray-900 hover:text-[#b8965f] font-medium transition flex items-center pb-8 pt-8">
+                            Services <i class="fa-solid fa-chevron-down ml-2 text-xs"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-64 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 rounded-b-lg overflow-hidden">
+                            <a href="/realeastatephoto.html" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">Real Estate Photography</a>
+                            <a href="/FPVRealEstateMovies.html" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">FPV Real Estate Movies</a>
+                            <a href="#services" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">Matterport 3D Scans</a>
+                            <a href="#services" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">Vloerplannen</a>
+                            <a href="#sport" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">Sportportretten</a>
+                            <a href="#" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f]">Brochure Sportfotografie (PDF)</a>
+                        </div>
+                    </div>
+
+                    <a href="/referenties.html" class="text-gray-900 hover:text-[#b8965f] font-medium transition">Referenties</a>
+                    <a href="/contact.html" class="bg-gray-900 text-white px-6 py-2.5 rounded-md hover:bg-[#b8965f] transition duration-300 font-medium tracking-wide">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gray-950 flex items-center justify-center min-h-[85vh]">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Vastgoed interieur" class="w-full h-full object-cover opacity-40">
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 tracking-tight">
+                Real Estate Visual Specialist <br>
+                <span class="text-[#b8965f]">België & USA</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-6 max-w-3xl mx-auto leading-relaxed font-light">
+                Ik ben <strong>Tom De Backer</strong>, oprichter van <strong>Snapwithus360.com</strong>. Wij zijn gespecialiseerd in high-end real estate visuals: Matterport 3D scans, FPV real estate movies en professionele vastgoedfotografie.
+            </p>
+            <p class="text-md md:text-lg text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+                We werken zowel in België als in de Verenigde Staten (o.a. vanuit Los Angeles). Ons doel is simpel: <strong>sneller verkopen of verhuren</strong> door jouw pand beter te presenteren dan de concurrentie.
+            </p>
+            
+            <div class="inline-block bg-black/40 backdrop-blur-md border border-white/10 p-6 rounded-xl text-left max-w-3xl mx-auto shadow-2xl">
+                <p class="text-white font-medium mb-3 flex items-center">
+                    <span class="bg-[#b8965f] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-sm mr-3">Nieuw</span> 
+                    We maken nu ook sportportretten voor clubs, teams en atleten.
+                </p>
+                <a href="#" class="inline-flex items-center text-[#b8965f] text-sm font-semibold hover:text-white transition group">
+                    Bekijk de sportfotografie brochure (PDF) 
+                    <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 hover:shadow-xl hover:border-gray-200 transition duration-300 group">
+                    <h3 class="text-xl font-bold mb-4 text-gray-900">Matterport 3D Scans & Digital Twins</h3>
+                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">Laat klanten je pand bezoeken vanop afstand met een interactieve 3D-tour.</p>
+                    <a href="#" class="text-[#b8965f] font-semibold text-sm hover:text-gray-900 transition flex items-center">Lees Meer <i class="fa-solid fa-angle-right ml-1"></i></a>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 hover:shadow-xl hover:border-gray-200 transition duration-300 group">
+                    <h3 class="text-xl font-bold mb-4 text-gray-900">FPV Real Estate Movies</h3>
+                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">Dynamische, vloeiende indoor/outdoor FPV-beelden die je pand “tot leven” brengen.</p>
+                    <a href="#" class="text-[#b8965f] font-semibold text-sm hover:text-gray-900 transition flex items-center">Lees Meer <i class="fa-solid fa-angle-right ml-1"></i></a>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 hover:shadow-xl hover:border-gray-200 transition duration-300 group">
+                    <h3 class="text-xl font-bold mb-4 text-gray-900">Real Estate Photography</h3>
+                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">Professionele interieur- en exterieurfoto’s met oog voor licht, compositie en detail.</p>
+                    <a href="#contact" class="text-[#b8965f] font-semibold text-sm hover:text-gray-900 transition flex items-center">Vraag info <i class="fa-solid fa-angle-right ml-1"></i></a>
+                </div>
+                <div class="bg-gray-900 text-white p-8 rounded-xl shadow-lg relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-[#b8965f] opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition"></div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest mb-3 block text-[#b8965f]">Nieuw</span>
+                    <h3 class="text-xl font-bold mb-4">Sportportretten</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">Premium portretten voor teams, clubs en atleten. Ideaal voor social media.</p>
+                    <a href="#sport" class="text-[#b8965f] font-semibold text-sm hover:text-white transition flex items-center">Bekijk info <i class="fa-solid fa-angle-right ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sport" class="py-24 bg-zinc-50 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                
+                <div class="order-2 lg:order-1 flex flex-col justify-center">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-900 tracking-tight">Sportportretten voor clubs, teams <br><span class="text-[#b8965f]">& atleten</span></h2>
+                    <p class="text-gray-600 mb-8 text-base leading-relaxed max-w-lg">
+                        Een professionele uitstraling voor je volledige ploeg of individuele spelers. We leveren beelden die meteen inzetbaar zijn voor <strong>social media, posters, clubwebsite</strong> en <strong>promomateriaal.</strong>
+                    </p>
+                    
+                    <ul class="space-y-4 mb-10 text-gray-700 text-sm font-medium">
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-circle-check text-[#b8965f] text-xl mr-4"></i> 
+                            Team- en individuele portretten
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-circle-check text-[#b8965f] text-xl mr-4"></i> 
+                            Consistente look voor clubbranding
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-circle-check text-[#b8965f] text-xl mr-4"></i> 
+                            Snelle levering + klaar voor socials/drukwerk
+                        </li>
+                    </ul>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="text-center bg-gray-900 text-white px-8 py-3.5 rounded-md text-sm font-bold hover:bg-[#b8965f] transition duration-300 shadow-md">Offerte / boeking &rarr;</a>
+                        <a href="#" class="text-center bg-white border border-gray-300 text-gray-900 px-8 py-3.5 rounded-md text-sm font-bold hover:border-gray-900 hover:bg-gray-50 transition duration-300">Brochure (PDF)</a>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 flex justify-center lg:justify-end">
+                    <div class="relative w-full max-w-md">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-gray-800 to-gray-600 rounded-2xl blur opacity-20"></div>
+                        <video src="assets/sportportretten-rook.mp4" autoplay loop muted playsinline class="relative w-full h-auto rounded-xl shadow-2xl object-cover bg-black border border-gray-800" style="aspect-ratio: 9/16;"></video>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                
+                <div class="order-1">
+                    <div class="rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 aspect-video relative group">
+                        <iframe title="Matterport 3D Tour" class="absolute inset-0 w-full h-full border-0" src="https://my.matterport.com/show/?m=jm5WwEA3HUN&amp;log=0&amp;help=0&amp;nt=0&amp;play=1&amp;qs=0&amp;brand=1&amp;dh=1&amp;tour=1&amp;gt=1&amp;hr=1&amp;mls=0&amp;mt=1&amp;tagNav=1&amp;pin=1&amp;portal=1&amp;f=1&amp;fp=1&amp;nozoom=0&amp;search=1&amp;wh=1&amp;kb=1&amp;lp=0&amp;title=0&amp;tourcta=1&amp;vr=1" allowfullscreen="" allow="xr-spatial-tracking"></iframe>
+                    </div>
+                </div>
+
+                <div class="order-2 flex flex-col justify-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 tracking-tight">Interactieve <span class="text-[#b8965f]">3D Tour</span></h2>
+                    <p class="text-gray-600 text-base leading-relaxed max-w-md">
+                        Met een interactieve 3D-tour bied je bezoekers de mogelijkheid om zelf door de ruimte te navigeren. Ideaal om meer leads te genereren en serieuze geïnteresseerden sneller te overtuigen.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="referenties" class="py-10 bg-zinc-50 border-t border-gray-100"></section>
+
+    <section id="contact" class="py-24 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                <div>
+                    <h2 class="text-3xl font-bold mb-8 text-gray-900">Neem contact op</h2>
+                    <form class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Naam</label>
+                            <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-md px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#b8965f] focus:border-[#b8965f] transition-colors" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">E-mail</label>
+                            <input type="email" class="w-full bg-gray-50 border border-gray-200 rounded-md px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#b8965f] focus:border-[#b8965f] transition-colors" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Telefoon (optioneel)</label>
+                            <input type="tel" class="w-full bg-gray-50 border border-gray-200 rounded-md px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#b8965f] focus:border-[#b8965f] transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Bericht</label>
+                            <textarea rows="5" class="w-full bg-gray-50 border border-gray-200 rounded-md px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#b8965f] focus:border-[#b8965f] transition-colors resize-none" required></textarea>
+                        </div>
+                        <button type="submit" class="bg-gray-900 text-white px-8 py-3.5 rounded-md font-bold hover:bg-[#b8965f] transition duration-300 w-full sm:w-auto shadow-md mt-2">
+                            Verstuur bericht
+                        </button>
+                    </form>
+                </div>
+
+                <div class="flex flex-col">
+                    <div class="mb-10">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900">Ons kantoor</h3>
+                        <div class="space-y-4">
+                            <p class="text-gray-600 flex items-start">
+                                <i class="fa-solid fa-location-dot mt-1 w-8 text-[#b8965f] text-lg"></i>
+                                <span>
+                                    <strong class="text-gray-900 block mb-1">Snap360 - Elektro Vlaanderen</strong>
+                                    Vijfstraten 163<br>
+                                    9100 Sint-Niklaas
+                                </span>
+                            </p>
+                            <p class="text-gray-600 flex items-center">
+                                <i class="fa-solid fa-phone w-8 text-[#b8965f] text-lg"></i>
+                                <a href="tel:+32476611099" class="hover:text-[#b8965f] transition font-medium">+32 476 61 10 99</a>
+                            </p>
+                            <p class="text-gray-600 flex items-center">
+                                <i class="fa-solid fa-envelope w-8 text-[#b8965f] text-lg"></i>
+                                <a href="mailto:tom@snapwithus360.com" class="hover:text-[#b8965f] transition font-medium">tom@snapwithus360.com</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex-grow min-h-[300px] border border-gray-200 rounded-xl overflow-hidden relative shadow-sm">
+                        <div id="map" class="absolute inset-0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<footer class="bg-gray-950 text-gray-400 py-16 mt-auto border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mb-16">
+                
+                <div class="space-y-6">
+                    <h4 class="text-white text-2xl font-bold tracking-tight">Snapwithus<span class="text-[#b8965f]">360</span></h4>
+                    <p class="text-sm leading-relaxed text-gray-400 max-w-sm">
+                        De specialist in innovatieve beeldtechnologie voor vastgoed, architectuur en sport. Wij brengen jouw visie virtueel tot leven met ongeëvenaarde precisie.
+                    </p>
+                </div>
+
+                <div class="md:mx-auto">
+                    <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-6">Navigatie</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li>
+                            <a href="index.html#home" class="hover:text-white transition-colors duration-300 flex items-center group">
+                                <i class="fa-solid fa-angle-right text-[10px] mr-3 text-[#b8965f] group-hover:translate-x-1 transition-transform"></i> Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#services" class="hover:text-white transition-colors duration-300 flex items-center group">
+                                <i class="fa-solid fa-angle-right text-[10px] mr-3 text-[#b8965f] group-hover:translate-x-1 transition-transform"></i> Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="referenties.html" class="hover:text-white transition-colors duration-300 flex items-center group">
+                                <i class="fa-solid fa-angle-right text-[10px] mr-3 text-[#b8965f] group-hover:translate-x-1 transition-transform"></i> Referenties
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#contact" class="hover:text-white transition-colors duration-300 flex items-center group">
+                                <i class="fa-solid fa-angle-right text-[10px] mr-3 text-[#b8965f] group-hover:translate-x-1 transition-transform"></i> Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="md:ml-auto">
+                    <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-6">Contact</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-location-dot mt-1 w-6 text-[#b8965f]"></i> 
+                            <span>Vijfstraten 163<br>9100 Sint-Niklaas</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-phone w-6 text-[#b8965f]"></i> 
+                            <a href="tel:+32476611099" class="hover:text-white transition-colors duration-300">+32 476 61 10 99</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-envelope w-6 text-[#b8965f]"></i> 
+                            <a href="mailto:tom@snapwithus360.com" class="hover:text-white transition-colors duration-300">tom@snapwithus360.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800/60 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500">
+                
+                <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
+                    <p>&copy; 2026 Snapwithus360.com</p>
+                    <span class="hidden sm:inline text-gray-700">|</span>
+                    <p>
+                        Made by <a href="https://consultyx.be" target="_blank" rel="noopener noreferrer" class="text-[#b8965f] font-medium hover:text-white transition-colors duration-300 ml-1">Consultyx</a>
+                    </p>
+                </div>
+                
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="hover:text-white transition-colors duration-300">Privacybeleid</a>
+                    <a href="#" class="hover:text-white transition-colors duration-300">Algemene voorwaarden</a>
+                </div>
+                
+            </div>
+        </div>
+    </footer>
+
+    <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 bg-gray-950 text-gray-300 border-t border-gray-800 p-6 z-[90] shadow-[0_-10px_40px_rgba(0,0,0,0.3)] transform translate-y-full transition-transform duration-500 ease-in-out">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-sm leading-relaxed">
+                <p>Wij gebruiken cookies om uw ervaring op onze website te verbeteren. 
+                   Door op "Accepteren" te klikken, gaat u akkoord. 
+                   <a href="#" class="text-[#b8965f] font-medium hover:underline">Lees ons privacybeleid</a>.</p>
+            </div>
+            <div class="flex space-x-3 whitespace-nowrap shrink-0">
+                <button id="btnDeclineCookies" class="px-5 py-2.5 border border-gray-700 text-gray-400 rounded-md text-sm font-medium hover:bg-gray-800 hover:text-white transition">Weigeren</button>
+                <button id="btnAcceptCookies" class="px-5 py-2.5 bg-[#b8965f] text-white rounded-md text-sm font-bold hover:bg-[#a3834f] transition shadow-lg">Accepteren</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

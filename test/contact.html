@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="nl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Snapwithus360</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 selection:bg-[#b8965f] selection:text-white flex flex-col min-h-screen">
+
+    <div id="languageModal" class="fixed inset-0 bg-gray-950 bg-opacity-90 z-[100] hidden flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full text-center">
+            <h2 class="text-2xl font-bold mb-6 text-gray-900">Kies uw regio / Choose region</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <button id="btnLangNL" class="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-[#b8965f] hover:bg-zinc-50 transition duration-300 group">
+                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">🇧🇪</span>
+                    <span class="font-semibold text-gray-900 group-hover:text-[#b8965f] transition-colors">Nederlands</span>
+                    <span class="text-sm text-gray-500">België</span>
+                </button>
+                <button id="btnLangEN" class="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-[#b8965f] hover:bg-zinc-50 transition duration-300 group">
+                    <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">🇺🇸</span>
+                    <span class="font-semibold text-gray-900 group-hover:text-[#b8965f] transition-colors">English</span>
+                    <span class="text-sm text-gray-500">USA</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bg-white/95 backdrop-blur-md shadow-sm fixed w-full z-50 top-0 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="assets/logo.png" alt="Snapwithus360 Logo" class="h-12 w-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50?text=Snapwithus360';">
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#home" class="text-gray-900 hover:text-[#b8965f] font-medium transition">Home</a>
+                    
+                    <div class="relative group">
+                        <button class="text-gray-900 hover:text-[#b8965f] font-medium transition flex items-center pb-8 pt-8">
+                            Services <i class="fa-solid fa-chevron-down ml-2 text-xs"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-64 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 rounded-b-lg overflow-hidden">
+                            <a href="/realeastatephoto.html" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">Real Estate Photography</a>
+                            <a href="index.html#services" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">FPV Real Estate Movies</a>
+                            <a href="index.html#services" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">Matterport 3D Scans</a>
+                            <a href="index.html#services" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">Vloerplannen</a>
+                            <a href="index.html#sport" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f] border-b border-gray-50">Sportportretten</a>
+                            <a href="#" class="block px-5 py-3 text-sm text-gray-700 hover:bg-zinc-50 hover:text-[#b8965f]">Brochure Sportfotografie (PDF)</a>
+                        </div>
+                    </div>
+
+                    <a href="referenties.html" class="text-gray-900 hover:text-[#b8965f] font-medium transition">Referenties</a>
+                    <a href="#" class="text-[#b8965f] font-medium transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 bg-gray-950 flex items-center justify-center border-b-4 border-[#b8965f]">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Contact achtergrond" class="w-full h-full object-cover opacity-20">
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 tracking-tight">
+                Contacteer ons
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed font-light">
+                Klaar om uw pand of team visueel naar een hoger niveau te tillen? Laat een bericht achter.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                
+                <div>
+                    <h2 class="text-3xl font-bold mb-8 text-gray-900">Stuur een bericht</h2>
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Naam</label>
+                                <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-md px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#b8965f] focus:border-[#b8965f] transition-colors" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Bedrijf (optioneel)</label>
+                                <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-md px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#b8965f] focus:border-[#b8965f] transition-colors">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">E-mail</label>
+                                <input type="email" class="w-full bg-gray-50 border border-gray-200 rounded-md px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#b8965f] focus:border-[#b8965f] transition-colors" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Telefoon</label>
+                                <input type="tel" class="w-full bg-gray-50 border border-gray-200 rounded-md px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#b8965f] focus:border-[#b8965f] transition-colors">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Onderwerp</label>
+                            <select class="w-full bg-gray-50 border border-gray-200 rounded-md px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#b8965f] focus:border-[#b8965f] transition-colors text-gray-700">
+                                <option>Vastgoedfotografie</option>
+                                <option>Matterport 3D Scans</option>
+                                <option>FPV Video</option>
+                                <option>Sportportretten</option>
+                                <option>Andere vraag</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Bericht</label>
+                            <textarea rows="6" class="w-full bg-gray-50 border border-gray-200 rounded-md px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#b8965f] focus:border-[#b8965f] transition-colors resize-none" required></textarea>
+                        </div>
+                        <button type="submit" class="bg-gray-900 text-white px-10 py-4 rounded-md font-bold hover:bg-[#b8965f] transition duration-300 w-full sm:w-auto shadow-lg tracking-wide">
+                            Verstuur bericht
+                        </button>
+                    </form>
+                </div>
+
+                <div class="flex flex-col">
+                    <div class="mb-10 bg-zinc-50 p-8 rounded-xl border border-gray-100">
+                        <h3 class="text-2xl font-bold mb-8 text-gray-900">Ons kantoor</h3>
+                        <div class="space-y-6">
+                            <p class="text-gray-600 flex items-start">
+                                <i class="fa-solid fa-location-dot mt-1 w-8 text-[#b8965f] text-xl"></i>
+                                <span>
+                                    <strong class="text-gray-900 block mb-1">Snap360 - Elektro Vlaanderen</strong>
+                                    Vijfstraten 163<br>
+                                    9100 Sint-Niklaas<br>
+                                    België
+                                </span>
+                            </p>
+                            <p class="text-gray-600 flex items-center">
+                                <i class="fa-solid fa-phone w-8 text-[#b8965f] text-xl"></i>
+                                <a href="tel:+32476611099" class="hover:text-[#b8965f] transition font-medium text-lg">+32 476 61 10 99</a>
+                            </p>
+                            <p class="text-gray-600 flex items-center">
+                                <i class="fa-solid fa-envelope w-8 text-[#b8965f] text-xl"></i>
+                                <a href="mailto:tom@snapwithus360.com" class="hover:text-[#b8965f] transition font-medium text-lg">tom@snapwithus360.com</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex-grow min-h-[350px] border border-gray-200 rounded-xl overflow-hidden relative shadow-sm z-0">
+                        <div id="map" class="absolute inset-0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-950 text-gray-400 py-16 mt-auto border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mb-16">
+                <div class="space-y-6">
+                    <h4 class="text-white text-2xl font-bold tracking-tight">Snapwithus<span class="text-[#b8965f]">360</span></h4>
+                    <p class="text-sm leading-relaxed text-gray-400 max-w-sm">
+                        De specialist in innovatieve beeldtechnologie voor vastgoed, architectuur en sport. Wij brengen jouw visie virtueel tot leven met ongeëvenaarde precisie.
+                    </p>
+                </div>
+                <div class="md:mx-auto">
+                    <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-6">Navigatie</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li>
+                            <a href="index.html#home" class="hover:text-white transition-colors duration-300 flex items-center group">
+                                <i class="fa-solid fa-angle-right text-[10px] mr-3 text-[#b8965f] group-hover:translate-x-1 transition-transform"></i> Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#services" class="hover:text-white transition-colors duration-300 flex items-center group">
+                                <i class="fa-solid fa-angle-right text-[10px] mr-3 text-[#b8965f] group-hover:translate-x-1 transition-transform"></i> Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="referenties.html" class="hover:text-white transition-colors duration-300 flex items-center group">
+                                <i class="fa-solid fa-angle-right text-[10px] mr-3 text-[#b8965f] group-hover:translate-x-1 transition-transform"></i> Referenties
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-white transition-colors duration-300 flex items-center group">
+                                <i class="fa-solid fa-angle-right text-[10px] mr-3 text-[#b8965f]"></i> Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:ml-auto">
+                    <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-6">Contact</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-location-dot mt-1 w-6 text-[#b8965f]"></i> 
+                            <span>Vijfstraten 163<br>9100 Sint-Niklaas</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-phone w-6 text-[#b8965f]"></i> 
+                            <a href="tel:+32476611099" class="hover:text-white transition-colors duration-300">+32 476 61 10 99</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-envelope w-6 text-[#b8965f]"></i> 
+                            <a href="mailto:tom@snapwithus360.com" class="hover:text-white transition-colors duration-300">tom@snapwithus360.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800/60 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500">
+                <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
+                    <p>&copy; 2026 Snapwithus360.com</p>
+                    <span class="hidden sm:inline text-gray-700">|</span>
+                    <p>
+                        Made by <a href="https://consultyx.be" target="_blank" rel="noopener noreferrer" class="text-[#b8965f] font-medium hover:text-white transition-colors duration-300 ml-1">Consultyx</a>
+                    </p>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="hover:text-white transition-colors duration-300">Privacybeleid</a>
+                    <a href="#" class="hover:text-white transition-colors duration-300">Algemene voorwaarden</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 bg-gray-950 text-gray-300 border-t border-gray-800 p-6 z-[90] shadow-[0_-10px_40px_rgba(0,0,0,0.3)] transform translate-y-full transition-transform duration-500 ease-in-out">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-sm leading-relaxed">
+                <p>Wij gebruiken cookies om uw ervaring op onze website te verbeteren. 
+                   Door op "Accepteren" te klikken, gaat u akkoord. 
+                   <a href="#" class="text-[#b8965f] font-medium hover:underline">Lees ons privacybeleid</a>.</p>
+            </div>
+            <div class="flex space-x-3 whitespace-nowrap shrink-0">
+                <button id="btnDeclineCookies" class="px-5 py-2.5 border border-gray-700 text-gray-400 rounded-md text-sm font-medium hover:bg-gray-800 hover:text-white transition">Weigeren</button>
+                <button id="btnAcceptCookies" class="px-5 py-2.5 bg-[#b8965f] text-white rounded-md text-sm font-bold hover:bg-[#a3834f] transition shadow-lg">Accepteren</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

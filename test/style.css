@@ -1,0 +1,18 @@
+/* Simpel, professioneel en modern lettertype */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Fix voor de Leaflet kaart */
+#map {
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+/* Voorkomt scrollen als taal-popup open is */
+body.modal-open {
+    overflow: hidden;
+}
