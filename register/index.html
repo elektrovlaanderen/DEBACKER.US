@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Afscheidsfeest · Sint-Niklaas naar Corona</title>
+<meta name="description" content="Laat weten of je erbij bent. Maandag 17 augustus, Bowling Stones Antwerpen.">
+<!-- Linkvoorbeeldkaart voor WhatsApp. Zet je de pagina in een submap,
+     pas dan de twee URL's hieronder aan naar bv. https://debacker.us/feest/ -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="SNAP360 Airways · SNS naar CRN">
+<meta property="og:description" content="Maandag 17 augustus, 18:30, Bowling Stones Antwerpen. Check in en laat weten met hoeveel je komt.">
+<meta property="og:url" content="https://debacker.us/">
+<meta property="og:image" content="https://debacker.us/images/ticket.jpg">
+<meta property="og:locale" content="nl_BE">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://debacker.us/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CONFIG staat in het <script> onderaan. Pas daar alles aan:
+   datum, uur, locatie, adres, deadline en de Apps Script URL.
+   ============================================================ */
+
+:root{
+  --ink:#12253C;
+  --ink-deep:#0A1726;
+  --ink-soft:#1C3855;
+  --stock:#DDE7DE;
+  --stock-2:#CBD9CF;
+  --stock-line:#A9BFB2;
+  --stamp:#B33A2B;
+  --amber:#D5943B;
+  --paper-ink:#1A2B23;
+
+  --f-display:"Archivo",system-ui,sans-serif;
+  --f-mono:"Courier Prime",ui-monospace,monospace;
+
+  --gap:clamp(1.25rem,4vw,2.5rem);
+  --maxw:56rem;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ink-deep);
+  color:#E7EDF2;
+  font-family:var(--f-display);
+  font-variation-settings:"wdth" 100,"wght" 400;
+  line-height:1.55;
+  overflow-x:hidden;
+}
+
+/* atmosphere: night sky over the Atlantic */
+.sky{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 78% -10%, #234868 0%, rgba(35,72,104,0) 58%),
+    radial-gradient(90% 60% at 8% 108%, #1C3855 0%, rgba(28,56,85,0) 60%),
+    linear-gradient(#0A1726, #12253C 55%, #0A1726);
+}
+.grain{
+  position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.16;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+.wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 var(--gap) 5rem}
+
+/* ---------- hero photo ---------- */
+.hero{
+  position:relative;z-index:2;
+  min-height:min(88vh,44rem);
+  display:flex;align-items:flex-end;
+  background:#0A1726 url("images/ticket.jpg") center 30% / cover no-repeat;
+}
+.hero-video{
+  position:absolute;inset:0;z-index:0;
+  width:100%;height:100%;object-fit:cover;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to bottom,
+    rgba(10,23,38,.62) 0%,
+    rgba(10,23,38,.12) 30%,
+    rgba(10,23,38,.86) 78%,
+    #0A1726 100%);
+}
+.hero-inner{
+  position:relative;z-index:2;width:100%;
+  max-width:var(--maxw);margin:0 auto;padding:0 var(--gap);
+}
+
+/* ---------- masthead ---------- */
+.masthead{padding:clamp(3rem,10vw,6rem) 0 clamp(2rem,6vw,3rem)}
+.hero .masthead{padding:clamp(7rem,26vw,12rem) 0 clamp(2rem,7vw,3.5rem)}
+.hero h1{text-shadow:0 2px 24px rgba(10,23,38,.7)}
+.route{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-family:var(--f-mono);font-size:.8rem;letter-spacing:.22em;
+  color:var(--amber);text-transform:uppercase;
+  border:1px solid rgba(224,169,60,.35);border-radius:999px;
+  padding:.4rem .9rem;
+}
+.route .dash{width:1.6rem;height:1px;background:rgba(224,169,60,.6);display:inline-block}
+h1{
+  font-size:clamp(2.6rem,10vw,5.4rem);
+  font-variation-settings:"wdth" 112,"wght" 800;
+  line-height:.94;letter-spacing:-.02em;
+  margin:1.4rem 0 0;text-transform:uppercase;
+}
+h1 em{font-style:normal;color:var(--amber);display:block}
+.lede{
+  max-width:34rem;margin:1.4rem 0 0;
+  font-size:clamp(1rem,2.6vw,1.15rem);color:#B9CBDA;
+}
+
+/* ---------- boarding pass (signature) ---------- */
+.pass-stage{perspective:1400px;margin:clamp(2rem,7vw,3.5rem) 0}
+.pass{
+  position:relative;display:grid;
+  grid-template-columns:1fr;
+  background:linear-gradient(160deg,var(--stock),var(--stock-2));
+  color:var(--paper-ink);
+  border-radius:6px;
+  box-shadow:0 26px 60px -18px rgba(0,0,0,.75), 0 2px 0 rgba(255,255,255,.25) inset;
+  transform:rotate(-1.1deg);
+  transition:transform .5s cubic-bezier(.2,.8,.3,1);
+  overflow:hidden;
+}
+.pass::after{ /* safety-paper guilloche */
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:repeating-linear-gradient(115deg,rgba(169,191,178,.55) 0 1px,transparent 1px 7px);
+}
+@media(min-width:44rem){ .pass{grid-template-columns:1fr 12rem} }
+
+.pass-main{padding:clamp(1.2rem,4vw,1.9rem);position:relative;z-index:1}
+.pass-head{
+  display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  border-bottom:1.5px solid var(--stock-line);padding-bottom:.7rem;flex-wrap:wrap;
+}
+.airline{
+  font-variation-settings:"wdth" 120,"wght" 900;
+  text-transform:uppercase;letter-spacing:.02em;
+  font-size:clamp(1rem,3.4vw,1.35rem);
+}
+.airline em{font-style:normal;color:var(--stamp)}
+.flightno{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.14em}
+
+.legs{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.6rem;padding:1.2rem 0 .4rem}
+.leg .lbl,.field .lbl,.stub .lbl{
+  display:block;font-family:var(--f-mono);font-size:.62rem;
+  letter-spacing:.2em;text-transform:uppercase;color:#5B7566;
+}
+.leg .code{
+  display:block;font-variation-settings:"wdth" 78,"wght" 900;
+  font-size:clamp(2.1rem,9vw,3.1rem);line-height:1;letter-spacing:-.01em;
+}
+.leg .city{display:block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em}
+.leg.to{text-align:right}
+.hop{position:relative;width:clamp(2.5rem,12vw,5rem);height:2.2rem}
+.hop svg{position:absolute;inset:0;width:100%;height:100%}
+.hop path{stroke:var(--stamp);stroke-width:1.5;fill:none;stroke-dasharray:3 3.5}
+.hop .plane{fill:var(--stamp)}
+
+.fields{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:.85rem 1rem;margin:1rem 0 0;padding-top:1rem;
+  border-top:1.5px solid var(--stock-line);
+}
+@media(min-width:34rem){ .fields{grid-template-columns:repeat(4,minmax(0,1fr))} }
+.field .val{
+  display:block;font-family:var(--f-mono);font-weight:700;font-size:.9rem;
+  margin-top:.15rem;word-break:break-word;
+}
+.field.wide{grid-column:span 2}
+
+.barcode{display:flex;gap:2px;height:2.6rem;align-items:stretch;margin-top:1.3rem}
+.barcode i{background:var(--paper-ink);border-radius:1px;display:block}
+
+/* stub */
+.stub{
+  position:relative;z-index:1;
+  border-top:2px dashed var(--stock-line);
+  padding:clamp(1.1rem,4vw,1.5rem);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  background:rgba(255,255,255,.22);
+}
+@media(min-width:44rem){
+  .stub{border-top:0;border-left:2px dashed var(--stock-line);flex-direction:column;align-items:flex-start;justify-content:center}
+}
+.stub .count{
+  font-variation-settings:"wdth" 80,"wght" 900;
+  font-size:clamp(3rem,14vw,4.4rem);line-height:.85;display:block;
+}
+.stub .sub{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#5B7566}
+
+/* stamp */
+.stamp{
+  position:absolute;z-index:3;top:38%;left:50%;
+  transform:translate(-50%,-50%) rotate(-15deg) scale(2.4);
+  border:4px double var(--stamp);color:var(--stamp);
+  font-variation-settings:"wdth" 110,"wght" 900;
+  text-transform:uppercase;letter-spacing:.08em;
+  font-size:clamp(1.1rem,4.5vw,1.7rem);
+  padding:.35rem 1rem;border-radius:4px;
+  opacity:0;pointer-events:none;mix-blend-mode:multiply;
+}
+.pass.stamped .stamp{animation:slam .5s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes slam{
+  0%{opacity:0;transform:translate(-50%,-50%) rotate(-15deg) scale(2.4)}
+  60%{opacity:.95;transform:translate(-50%,-50%) rotate(-15deg) scale(.94)}
+  100%{opacity:.9;transform:translate(-50%,-50%) rotate(-15deg) scale(1)}
+}
+.pass.stamped{transform:rotate(-1.1deg) scale(.995)}
+
+/* ---------- form ---------- */
+.form-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem}
+h2{
+  font-size:clamp(1.3rem,4.5vw,1.8rem);margin:0;text-transform:uppercase;
+  font-variation-settings:"wdth" 108,"wght" 800;letter-spacing:-.01em;
+}
+.deadline{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.12em;color:var(--amber);text-transform:uppercase}
+
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.4rem}
+.choice label{
+  border:1.5px solid rgba(185,203,218,.3);border-radius:4px;
+  padding:.85rem 1rem;cursor:pointer;text-align:center;
+  font-family:var(--f-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  transition:border-color .2s,background .2s,color .2s;
+}
+.choice input{position:absolute;opacity:0;width:0;height:0}
+.choice input:checked + span{}
+.choice label:has(input:checked){background:var(--amber);border-color:var(--amber);color:var(--ink-deep);font-weight:700}
+.choice label:has(input:focus-visible){outline:2px solid #fff;outline-offset:2px}
+
+.grid{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:34rem){ .grid.two{grid-template-columns:1fr 1fr} }
+label.f{display:block}
+label.f > span{
+  display:block;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.18em;
+  text-transform:uppercase;color:#8FA9BE;margin-bottom:.4rem;
+}
+input[type=text],input[type=email],input[type=number],textarea,select{
+  width:100%;background:rgba(255,255,255,.05);
+  border:1.5px solid rgba(185,203,218,.28);border-radius:4px;
+  color:#fff;font-family:var(--f-mono);font-size:1rem;
+  padding:.8rem .9rem;
+}
+textarea{min-height:5.5rem;resize:vertical;line-height:1.5}
+input:focus,textarea:focus{outline:none;border-color:var(--amber);background:rgba(255,255,255,.09)}
+input::placeholder,textarea::placeholder{color:#5C748A}
+
+.counter{display:flex;align-items:center;gap:.55rem}
+.counter button{
+  width:2.9rem;height:2.9rem;flex:none;cursor:pointer;
+  background:transparent;border:1.5px solid rgba(185,203,218,.28);border-radius:4px;
+  color:#fff;font-size:1.3rem;line-height:1;font-family:var(--f-display);
+}
+.counter button:hover{border-color:var(--amber);color:var(--amber)}
+.counter input{text-align:center}
+
+.submit{
+  margin-top:1.6rem;width:100%;cursor:pointer;
+  background:var(--amber);color:var(--ink-deep);border:0;border-radius:4px;
+  padding:1.05rem 1.5rem;font-family:var(--f-display);
+  font-variation-settings:"wdth" 110,"wght" 800;
+  text-transform:uppercase;letter-spacing:.1em;font-size:.95rem;
+}
+.submit:hover{filter:brightness(1.07)}
+.submit:disabled{opacity:.55;cursor:progress}
+.note{font-family:var(--f-mono);font-size:.72rem;color:#7E97AC;margin-top:.9rem;text-align:center}
+.msg{margin-top:1rem;font-family:var(--f-mono);font-size:.82rem;padding:.85rem 1rem;border-radius:4px;display:none}
+.msg.err{display:block;background:rgba(179,58,43,.18);border:1px solid rgba(179,58,43,.5);color:#F0B3AA}
+.msg.ok{display:block;background:rgba(224,169,60,.14);border:1px solid rgba(224,169,60,.45);color:#F2D9A6}
+
+/* ---------- details ---------- */
+.details{
+  margin-top:clamp(3rem,9vw,5rem);
+  border-top:1px solid rgba(185,203,218,.18);padding-top:2rem;
+  display:grid;gap:1.6rem;grid-template-columns:1fr;
+}
+@media(min-width:34rem){ .details{grid-template-columns:repeat(auto-fit,minmax(11rem,1fr))} }
+.details h3{
+  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--amber);margin:0 0 .5rem;font-weight:400;
+}
+.details p{margin:0;color:#C6D4E0;font-size:.95rem}
+.details a{color:#fff}
+.sign{
+  margin-top:3rem;font-family:var(--f-mono);font-size:.72rem;
+  letter-spacing:.14em;text-transform:uppercase;color:#5C748A;text-align:center;
+}
+
+.reveal{opacity:0;transform:translateY(14px);animation:up .8s cubic-bezier(.2,.8,.3,1) forwards}
+.reveal:nth-child(2){animation-delay:.08s}
+@keyframes up{to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  .hero-video{display:none}
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  .pass.stamped .stamp{opacity:.9;transform:translate(-50%,-50%) rotate(-15deg)}
+}
+</style>
+</head>
+<body>
+<div class="sky"></div>
+<div class="grain"></div>
+
+<header class="hero">
+  <!-- Zet je clip als images/ticket.mp4 naast de foto. Valt hij weg,
+       dan toont de browser gewoon images/ticket.jpg. -->
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="images/ticket.jpg">
+    <source src="images/ticket.mp4" type="video/mp4">
+  </video>
+  <div class="hero-inner masthead reveal">
+    <span class="route"><b id="rFrom">SNS</b><i class="dash"></i><b id="rTo">CRN</b></span>
+    <h1>Hapjes, drank<em>en dj's</em></h1>
+    <p class="lede" id="lede">We zetten onze Amerikaanse tak op poten. Voor het zover is hebben we de zaak een avond helemaal voor ons alleen. Hapjes en snacks, iets te drinken, dj's en muziek. Check hieronder in, dan weten wij op hoeveel volk we mogen rekenen.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="pass-stage reveal">
+    <article class="pass" id="pass">
+      <div class="pass-main">
+        <div class="pass-head">
+          <span class="airline">SNAP360 <em>Airways</em></span>
+          <span class="flightno" id="flightNo">VL 001</span>
+        </div>
+
+        <div class="legs">
+          <div class="leg from">
+            <span class="lbl">Vertrek</span>
+            <span class="code" id="codeFrom">SNS</span>
+            <span class="city" id="cityFrom">Sint-Niklaas</span>
+          </div>
+          <div class="hop" aria-hidden="true">
+            <svg viewBox="0 0 100 44">
+              <path d="M4 40 C 30 4, 70 4, 96 40"/>
+              <g class="plane" transform="translate(44,2) rotate(12)">
+                <path d="M6 0 L8 6 L14 8 L8 10 L6 16 L4 10 L-2 8 L4 6 Z"/>
+              </g>
+            </svg>
+          </div>
+          <div class="leg to">
+            <span class="lbl">Aankomst</span>
+            <span class="code" id="codeTo">CRN</span>
+            <span class="city" id="cityTo">Corona, CA</span>
+          </div>
+        </div>
+
+        <div class="fields">
+          <div class="field wide"><span class="lbl">Passagier</span><span class="val" id="vName">—</span></div>
+          <div class="field"><span class="lbl">Datum</span><span class="val" id="vDate">—</span></div>
+          <div class="field"><span class="lbl">Vanaf</span><span class="val" id="vTime">—</span></div>
+          <div class="field wide"><span class="lbl">Locatie</span><span class="val" id="vVenue">—</span></div>
+          <div class="field"><span class="lbl">Klasse</span><span class="val" id="vGate">—</span></div>
+          <div class="field"><span class="lbl">Status</span><span class="val" id="vStatus">Open</span></div>
+        </div>
+
+        <div class="barcode" id="barcode" aria-hidden="true"></div>
+      </div>
+
+      <div class="stub">
+        <div>
+          <span class="lbl">Personen</span>
+          <span class="count" id="stubCount">0</span>
+        </div>
+        <div>
+          <span class="sub" id="stubSub">volwassenen + kinderen</span>
+        </div>
+      </div>
+
+      <div class="stamp" id="stamp">Ingecheckt</div>
+    </article>
+  </section>
+
+  <section class="rsvp">
+    <div class="form-head">
+      <h2>Inchecken</h2>
+      <span class="deadline" id="deadline"></span>
+    </div>
+
+    <div class="choice">
+      <label><input type="radio" name="komt" value="ja" checked><span>Ik ben erbij</span></label>
+      <label><input type="radio" name="komt" value="nee"><span>Ik kan niet</span></label>
+    </div>
+
+    <div class="grid two">
+      <label class="f"><span>Naam</span>
+        <input type="text" id="naam" autocomplete="name" placeholder="Voornaam en naam"></label>
+      <label class="f"><span>E-mail</span>
+        <input type="email" id="email" autocomplete="email" placeholder="voor de bevestiging"></label>
+      <label class="f"><span>Gsm</span>
+        <input type="text" id="gsm" autocomplete="tel" inputmode="tel" placeholder="04.. of +32.."></label>
+    </div>
+
+    <div class="grid two" id="countBlock" style="margin-top:1rem">
+      <label class="f"><span>Volwassenen</span>
+        <div class="counter">
+          <button type="button" data-step="-1" data-target="volw" aria-label="Minder volwassenen">–</button>
+          <input type="number" id="volw" value="1" min="0" max="20" inputmode="numeric">
+          <button type="button" data-step="1" data-target="volw" aria-label="Meer volwassenen">+</button>
+        </div>
+      </label>
+      <label class="f"><span>Kinderen</span>
+        <div class="counter">
+          <button type="button" data-step="-1" data-target="kind" aria-label="Minder kinderen">–</button>
+          <input type="number" id="kind" value="0" min="0" max="20" inputmode="numeric">
+          <button type="button" data-step="1" data-target="kind" aria-label="Meer kinderen">+</button>
+        </div>
+      </label>
+    </div>
+
+    <label class="f" style="margin-top:1rem"><span>Berichtje (optioneel)</span>
+      <textarea id="bericht" placeholder="Allergie, iets dat we moeten weten, of gewoon een woordje."></textarea></label>
+
+    <button class="submit" id="send">Check in</button>
+    <p class="note" id="counterNote"></p>
+    <div class="msg" id="msg" role="status"></div>
+  </section>
+
+  <section class="details">
+    <div><h3>Wanneer</h3><p id="dWhen">—</p></div>
+    <div><h3>Waar</h3><p id="dWhere">—</p></div>
+    <div><h3>Goed om weten</h3><p id="dInfo">—</p></div>
+    <div><h3>Cadeaus</h3><p id="dGift">—</p></div>
+  </section>
+
+  <p class="sign" id="sign">Tot dan</p>
+</div>
+
+<script>
+/* =====================================================================
+   1. VUL DIT IN
+   ===================================================================== */
+const CONFIG = {
+  // Plak hier de /exec URL van je Apps Script web app
+  API: "https://script.google.com/macros/s/AKfycbyPGnHc77krqHU2LqU8bi7QX7T6FZctV4yt74npH5gWQUjhSTmrubgPbY9eluDA6F6U/exec",
+
+  gastheren: "Tom, Dominique, Ethan en Summer",
+
+  vanCode: "SNS",  vanStad: "Sint-Niklaas",
+  naarCode: "CRN", naarStad: "Corona, CA",
+  vluchtNr: "SN 360",
+
+  datumKort: "MA 17 AUG",              // op het ticket
+  datumLang: "Maandag 17 augustus",    // in de details
+  uur: "18:30",
+  venue: "Bowling Stones",
+  klasse: "Privé",                      // staat als "Klasse" op het ticket
+  adres: "Noorderlaan 104A, 2030 Antwerpen",
+  mapsLink: "https://maps.google.com/?q=Bowling+Stones+Noorderlaan+104A+2030+Antwerpen",
+  deadline: "Inschrijven tot vrijdag 14 augustus",
+  info: "De zaak is die avond helemaal voor ons. Hapjes en snacks staan klaar, dj's zorgen voor de muziek. Kinderen zijn welkom.",
+  cadeaus: "Liever geen cadeaus, die krijgen we toch niet mee in de koffer. Een envelop past er wel nog bij.",
+
+  toonTeller: true    // live teller "x personen ingecheckt"
+};
+
+/* =====================================================================
+   2. Vanaf hier hoef je niets meer aan te passen
+   ===================================================================== */
+const $ = id => document.getElementById(id);
+
+// vul de statische tekst
+$("rFrom").textContent = CONFIG.vanCode;
+$("rTo").textContent = CONFIG.naarCode;
+$("codeFrom").textContent = CONFIG.vanCode;
+$("codeTo").textContent = CONFIG.naarCode;
+$("cityFrom").textContent = CONFIG.vanStad;
+$("cityTo").textContent = CONFIG.naarStad;
+$("flightNo").textContent = CONFIG.vluchtNr;
+$("vDate").textContent = CONFIG.datumKort;
+$("vTime").textContent = CONFIG.uur;
+$("vVenue").textContent = CONFIG.venue;
+$("vGate").textContent = CONFIG.klasse || "—";
+$("deadline").textContent = CONFIG.deadline;
+$("dWhen").textContent = CONFIG.datumLang + ", vanaf " + CONFIG.uur;
+$("dInfo").textContent = CONFIG.info;
+$("dGift").textContent = CONFIG.cadeaus;
+$("sign").textContent = "Tot dan, " + CONFIG.gastheren;
+document.title = "Afscheidsfeest · " + CONFIG.vanStad + " naar " + CONFIG.naarStad;
+
+$("dWhere").innerHTML = CONFIG.mapsLink
+  ? CONFIG.venue + "<br><a href=\"" + CONFIG.mapsLink + "\" target=\"_blank\" rel=\"noopener\">" + CONFIG.adres + "</a>"
+  : CONFIG.venue + "<br>" + CONFIG.adres;
+
+// barcode
+(function(){
+  const bc = $("barcode");
+  let html = "";
+  for (let i = 0; i < 58; i++){
+    const w = [1,1,2,3][Math.floor(Math.random()*4)];
+    html += "<i style=\"width:" + w + "px;opacity:" + (Math.random() > .82 ? .25 : 1) + "\"></i>";
+  }
+  bc.innerHTML = html;
+})();
+
+// live ticket
+const naam = $("naam"), volw = $("volw"), kind = $("kind");
+const komtRadios = document.querySelectorAll("input[name=komt]");
+
+function komt(){ return document.querySelector("input[name=komt]:checked").value === "ja"; }
+
+function paint(){
+  const n = naam.value.trim();
+  $("vName").textContent = n ? n.toUpperCase() : "—";
+  if (komt()){
+    const total = (+volw.value || 0) + (+kind.value || 0);
+    $("stubCount").textContent = total;
+    $("stubSub").textContent = "volwassenen + kinderen";
+    $("vStatus").textContent = "Bevestigd";
+    $("countBlock").style.display = "";
+  } else {
+    $("stubCount").textContent = "0";
+    $("stubSub").textContent = "niet aan boord";
+    $("vStatus").textContent = "Geannuleerd";
+    $("countBlock").style.display = "none";
+  }
+}
+[naam, volw, kind].forEach(el => el.addEventListener("input", paint));
+komtRadios.forEach(r => r.addEventListener("change", paint));
+
+document.querySelectorAll(".counter button").forEach(b => {
+  b.addEventListener("click", () => {
+    const t = $(b.dataset.target);
+    const v = Math.min(20, Math.max(0, (+t.value || 0) + (+b.dataset.step)));
+    t.value = v; paint();
+  });
+});
+paint();
+
+// live teller
+if (CONFIG.toonTeller && CONFIG.API.indexOf("http") === 0){
+  fetch(CONFIG.API + "?actie=telling")
+    .then(r => r.json())
+    .then(d => {
+      if (d && d.totaal > 0){
+        $("counterNote").textContent = d.totaal + " personen al ingecheckt";
+      }
+    })
+    .catch(() => {});
+}
+
+// verzenden
+const msg = $("msg"), send = $("send");
+function toon(type, tekst){ msg.className = "msg " + type; msg.textContent = tekst; }
+
+send.addEventListener("click", async () => {
+  const data = {
+    naam: naam.value.trim(),
+    email: $("email").value.trim(),
+    gsm: $("gsm").value.trim(),
+    komt: komt() ? "Ja" : "Nee",
+    volwassenen: komt() ? (+volw.value || 0) : 0,
+    kinderen: komt() ? (+kind.value || 0) : 0,
+    bericht: $("bericht").value.trim()
+  };
+
+  if (!data.naam){ toon("err", "Vul je naam in."); naam.focus(); return; }
+  if (!/^\S+@\S+\.\S+$/.test(data.email)){ toon("err", "Vul een geldig e-mailadres in, dan sturen we een bevestiging."); $("email").focus(); return; }
+  if (data.gsm.replace(/[^0-9]/g, "").length < 9){ toon("err", "Vul je gsm-nummer in, voor als er die avond iets misloopt."); $("gsm").focus(); return; }
+  if (data.komt === "Ja" && data.volwassenen + data.kinderen < 1){ toon("err", "Zet het aantal personen op minstens 1."); return; }
+  if (CONFIG.API.indexOf("http") !== 0){ toon("err", "De inschrijvingen staan nog niet open. Probeer straks opnieuw."); return; }
+
+  send.disabled = true; send.textContent = "Bezig";
+  msg.className = "msg";
+
+  try{
+    const res = await fetch(CONFIG.API, { method:"POST", body: JSON.stringify(data) });
+    const out = await res.json();
+    if (!out.ok) throw new Error(out.fout || "mislukt");
+
+    $("pass").classList.add("stamped");
+    $("stamp").textContent = data.komt === "Ja" ? "Ingecheckt" : "Geannuleerd";
+    toon("ok", data.komt === "Ja"
+      ? "Je staat op de lijst. De bevestiging is onderweg naar " + data.email + "."
+      : "Jammer, maar genoteerd. Bedankt om het te laten weten.");
+    send.textContent = "Aangemeld";
+    document.querySelector(".pass-stage").scrollIntoView({behavior:"smooth", block:"center"});
+  } catch(e){
+    toon("err", "Het versturen lukte niet. Probeer opnieuw of stuur ons gewoon een bericht.");
+    send.disabled = false; send.textContent = "Check in";
+  }
+});
+</script>
+</body>
+</html>
