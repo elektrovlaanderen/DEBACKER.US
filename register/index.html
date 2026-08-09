@@ -87,6 +87,15 @@ body{
     rgba(10,23,38,.86) 78%,
     #0A1726 100%);
 }
+.sound-btn{
+  position:absolute;z-index:3;right:var(--gap);bottom:calc(var(--gap) + .5rem);
+  width:2.9rem;height:2.9rem;border-radius:999px;cursor:pointer;
+  background:rgba(10,23,38,.55);backdrop-filter:blur(6px);
+  border:1.5px solid rgba(231,237,242,.35);color:#fff;
+  display:grid;place-items:center;font-size:1rem;line-height:1;
+  transition:border-color .2s,background .2s;
+}
+.sound-btn:hover{border-color:var(--amber);color:var(--amber)}
 .hero-inner{
   position:relative;z-index:2;width:100%;
   max-width:var(--maxw);margin:0 auto;padding:0 var(--gap);
@@ -314,6 +323,7 @@ input::placeholder,textarea::placeholder{color:#5C748A}
   <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="images/ticket.jpg">
     <source src="images/ticket.mp4" type="video/mp4">
   </video>
+  <button class="sound-btn" id="soundBtn" type="button" aria-label="Geluid aan of uit">&#128263;</button>
   <div class="hero-inner masthead reveal">
     <span class="route"><b id="rFrom">SNS</b><i class="dash"></i><b id="rTo">CRN</b></span>
     <h1>Hapjes, drank<em>en dj's</em></h1>
@@ -465,6 +475,18 @@ const CONFIG = {
    2. Vanaf hier hoef je niets meer aan te passen
    ===================================================================== */
 const $ = id => document.getElementById(id);
+
+// geluid van de kopvideo
+(function(){
+  const v = document.querySelector(".hero-video"), b = document.getElementById("soundBtn");
+  if (!v || !b) return;
+  b.addEventListener("click", function(){
+    v.muted = !v.muted;
+    b.innerHTML = v.muted ? "&#128263;" : "&#128266;";
+    b.setAttribute("aria-pressed", String(!v.muted));
+    if (!v.muted) v.play().catch(function(){});
+  });
+})();
 
 // vul de statische tekst
 $("rFrom").textContent = CONFIG.vanCode;
