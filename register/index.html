@@ -11,7 +11,7 @@
 <meta property="og:title" content="SNAP360 Airways · SNS naar CRN">
 <meta property="og:description" content="Maandag 17 augustus, 18:30, Bowling Stones Antwerpen. Check in en laat weten met hoeveel je komt.">
 <meta property="og:url" content="https://debacker.us/">
-<meta property="og:image" content="https://debacker.us/images/ticket.jpg">
+<meta property="og:image" content="https://debacker.us/ticket.jpg">
 <meta property="og:locale" content="nl_BE">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://debacker.us/">
@@ -73,7 +73,7 @@ body{
   position:relative;z-index:2;
   min-height:min(94svh,52rem);
   display:flex;align-items:flex-end;
-  background:#0A1726 url("images/ticket.jpg") center top / contain no-repeat;
+  background:#0A1726 url("ticket.jpg") center top / contain no-repeat;
 }
 .hero-video{
   position:absolute;inset:0;z-index:0;
@@ -282,6 +282,17 @@ input::placeholder,textarea::placeholder{color:#5C748A}
 .submit:hover{filter:brightness(1.07)}
 .submit:disabled{opacity:.55;cursor:progress}
 .note{font-family:var(--f-mono);font-size:.72rem;color:#7E97AC;margin-top:.9rem;text-align:center}
+.booked{
+  border:1.5px solid rgba(179,58,43,.55);
+  background:rgba(179,58,43,.14);
+  border-radius:4px;padding:clamp(1.2rem,4vw,1.8rem);text-align:center;
+}
+.booked strong{
+  display:block;font-variation-settings:"wdth" 108,"wght" 800;
+  text-transform:uppercase;letter-spacing:.04em;color:#F0B3AA;
+  font-size:clamp(1.1rem,4vw,1.5rem);margin-bottom:.5rem;
+}
+.booked p{margin:0;color:#D7C0BC;font-size:.95rem}
 .msg{margin-top:1rem;font-family:var(--f-mono);font-size:.82rem;padding:.85rem 1rem;border-radius:4px;display:none}
 .msg.err{display:block;background:rgba(179,58,43,.18);border:1px solid rgba(179,58,43,.5);color:#F0B3AA}
 .msg.ok{display:block;background:rgba(224,169,60,.14);border:1px solid rgba(224,169,60,.45);color:#F2D9A6}
@@ -320,10 +331,10 @@ input::placeholder,textarea::placeholder{color:#5C748A}
 <div class="grain"></div>
 
 <header class="hero">
-  <!-- Zet je clip als images/ticket.mp4 naast de foto. Valt hij weg,
-       dan toont de browser gewoon images/ticket.jpg. -->
-  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="images/ticket.jpg">
-    <source src="images/ticket.mp4" type="video/mp4">
+  <!-- Zet je clip als ticket.mp4 naast de foto. Valt hij weg,
+       dan toont de browser gewoon ticket.jpg. -->
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="ticket.jpg">
+    <source src="ticket.mp4" type="video/mp4">
   </video>
   <button class="sound-btn" id="soundBtn" type="button" aria-label="Geluid aan of uit">&#128263;</button>
   <div class="hero-inner masthead reveal">
@@ -396,6 +407,12 @@ input::placeholder,textarea::placeholder{color:#5C748A}
       <span class="deadline" id="deadline"></span>
     </div>
 
+    <div class="booked" id="volBlok" style="display:none;margin-bottom:1.4rem">
+      <strong id="volTitel"></strong>
+      <p id="volTekst"></p>
+    </div>
+
+    <div id="formBlok">
     <div class="choice">
       <label><input type="radio" name="komt" value="ja" checked><span>Ik ben erbij</span></label>
       <label><input type="radio" name="komt" value="nee"><span>Ik kan niet</span></label>
@@ -433,6 +450,7 @@ input::placeholder,textarea::placeholder{color:#5C748A}
     <button class="submit" id="send">Check in</button>
     <p class="note" id="counterNote"></p>
     <div class="msg" id="msg" role="status"></div>
+    </div>
   </section>
 
   <section class="details">
@@ -467,6 +485,15 @@ const CONFIG = {
   adres: "Noorderlaan 104A, 2030 Antwerpen",
   mapsLink: "https://maps.google.com/?q=Bowling+Stones+Noorderlaan+104A+2030+Antwerpen",
   deadline: "Inschrijven tot vrijdag 14 augustus",
+
+  // Vanaf dit moment is de vlucht vol: het formulier verdwijnt en
+  // iedereen krijgt de melding hieronder te zien.
+  // Formaat: jaar, maand-1, dag, uur, minuut. 7 = augustus.
+  sluiting: new Date(2026, 7, 14, 0, 0),
+  volTitel: "This flight is fully booked",
+  volTekst: "Vul gerust toch je gegevens in. Je komt dan op de wachtlijst en onze cabin crew verwittigt je zodra er plaats vrijkomt.",
+  wachtTitel: "Je staat op de wachtlijst",
+  wachtTekst: "Onze cabin crew verwittigt je zodra er plaats vrijkomt. Bedankt alvast.",
   info: "De zaak is die avond helemaal voor ons. Hapjes en snacks staan klaar, dj's zorgen voor de muziek. Kinderen zijn welkom.",
   cadeaus: "Liever geen cadeaus, die krijgen we toch niet mee in de koffer. Een envelop past er wel nog bij.",
 
@@ -585,6 +612,17 @@ document.querySelectorAll(".counter button").forEach(b => {
 });
 paint();
 
+// vlucht vol?
+const VOL = CONFIG.sluiting instanceof Date && new Date() >= CONFIG.sluiting;
+if (VOL){
+  $("volBlok").style.display = "";
+  $("volTitel").textContent = CONFIG.volTitel;
+  $("volTekst").textContent = CONFIG.volTekst;
+  $("deadline").textContent = "Volzet";
+  $("vStatus").textContent = "Wachtlijst";
+  $("send").textContent = "Zet me op de wachtlijst";
+}
+
 // live teller
 if (CONFIG.toonTeller && CONFIG.API.indexOf("http") === 0){
   fetch(CONFIG.API + "?actie=telling")
@@ -627,10 +665,20 @@ send.addEventListener("click", async () => {
     if (!out.ok) throw new Error(out.fout || "mislukt");
 
     $("pass").classList.add("stamped");
-    $("stamp").textContent = data.komt === "Ja" ? "Ingecheckt" : "Geannuleerd";
-    toon("ok", data.komt === "Ja"
-      ? "Je staat op de lijst. De bevestiging is onderweg naar " + data.email + "."
-      : "Jammer, maar genoteerd. Bedankt om het te laten weten.");
+    if (out.wachtlijst){
+      $("stamp").textContent = "Wachtlijst";
+      $("vStatus").textContent = "Wachtlijst";
+      $("volTitel").textContent = CONFIG.wachtTitel;
+      $("volTekst").textContent = CONFIG.wachtTekst;
+      $("volBlok").style.display = "";
+      $("formBlok").style.display = "none";
+      toon("ok", "Je gegevens zijn genoteerd. De bevestiging is onderweg naar " + data.email + ".");
+    } else {
+      $("stamp").textContent = data.komt === "Ja" ? "Ingecheckt" : "Geannuleerd";
+      toon("ok", data.komt === "Ja"
+        ? "Je staat op de lijst. De bevestiging is onderweg naar " + data.email + "."
+        : "Jammer, maar genoteerd. Bedankt om het te laten weten.");
+    }
     send.textContent = "Aangemeld";
     document.querySelector(".pass-stage").scrollIntoView({behavior:"smooth", block:"center"});
   } catch(e){
