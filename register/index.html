@@ -11,7 +11,7 @@
 <meta property="og:title" content="SNAP360 Airways · SNS naar CRN">
 <meta property="og:description" content="Maandag 17 augustus, 18:30, Bowling Stones Antwerpen. Check in en laat weten met hoeveel je komt.">
 <meta property="og:url" content="https://debacker.us/">
-<meta property="og:image" content="https://debacker.us/ticket.jpg">
+<meta property="og:image" content="https://debacker.us/images/ticket.jpg">
 <meta property="og:locale" content="nl_BE">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://debacker.us/">
@@ -73,7 +73,7 @@ body{
   position:relative;z-index:2;
   min-height:min(94svh,52rem);
   display:flex;align-items:flex-end;
-  background:#0A1726 url("ticket.jpg") center top / contain no-repeat;
+  background:#0A1726 url("images/ticket.jpg") center top / contain no-repeat;
 }
 .hero-video{
   position:absolute;inset:0;z-index:0;
@@ -337,10 +337,11 @@ input::placeholder,textarea::placeholder{color:#5C748A}
 <div class="grain"></div>
 
 <header class="hero">
-  <!-- Zet je clip als ticket.mp4 naast de foto. Valt hij weg,
-       dan toont de browser gewoon ticket.jpg. -->
-  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="ticket.jpg">
-    <source src="ticket.mp4" type="video/mp4">
+  <!-- index.html hoort naast de map images/ te staan.
+       Staat index.html in dezelfde map als de bestanden zelf,
+       haal dan overal "images/" weg. -->
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="images/ticket.jpg">
+    <source src="images/ticket.mp4" type="video/mp4">
   </video>
   <button class="sound-btn" id="soundBtn" type="button" aria-label="Geluid aan of uit">&#128263;</button>
   <div class="hero-inner masthead reveal">
