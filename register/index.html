@@ -208,6 +208,12 @@ h1 em{font-style:normal;color:var(--amber);display:block}
 .stub .sub{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#5B7566}
 
 /* stamp */
+.stamp.vol{
+  font-size:clamp(.95rem,3.6vw,1.4rem);
+  letter-spacing:.06em;line-height:1.05;
+  max-width:min(78%,20rem);text-align:center;
+  transform-origin:center;
+}
 .stamp{
   position:absolute;z-index:3;top:38%;left:50%;
   transform:translate(-50%,-50%) rotate(-15deg) scale(2.4);
@@ -491,9 +497,10 @@ const CONFIG = {
   // Formaat: jaar, maand-1, dag, uur, minuut. 7 = augustus.
   sluiting: new Date(2026, 7, 14, 0, 0),
   volTitel: "This flight is fully booked",
-  volTekst: "Vul gerust toch je gegevens in. Je komt dan op de wachtlijst en onze cabin crew verwittigt je zodra er plaats vrijkomt.",
-  wachtTitel: "Je staat op de wachtlijst",
-  wachtTekst: "Onze cabin crew verwittigt je zodra er plaats vrijkomt. Bedankt alvast.",
+  volStempel: "Fully booked",
+  volTekst: "Vul gerust toch je gegevens in, dan weten we dat je erbij wou zijn. Beloven kunnen we niets meer, maar we bekijken het.",
+  wachtTitel: "Genoteerd",
+  wachtTekst: "Je gegevens staan bij ons. Het is volzet, dus we kunnen niets beloven. Kom je graag toch nog mee, spreek ons dan gerust even persoonlijk aan.",
   info: "De zaak is die avond helemaal voor ons. Hapjes en snacks staan klaar, dj's zorgen voor de muziek. Kinderen zijn welkom.",
   cadeaus: "Liever geen cadeaus, die krijgen we toch niet mee in de koffer. Een envelop past er wel nog bij.",
 
@@ -619,8 +626,10 @@ if (VOL){
   $("volTitel").textContent = CONFIG.volTitel;
   $("volTekst").textContent = CONFIG.volTekst;
   $("deadline").textContent = "Volzet";
-  $("vStatus").textContent = "Wachtlijst";
-  $("send").textContent = "Zet me op de wachtlijst";
+  $("vStatus").textContent = "Fully booked";
+  $("send").textContent = "Noteer mij toch";
+  $("stamp").textContent = CONFIG.volStempel;
+  $("pass").classList.add("stamped", "vol");
 }
 
 // live teller
@@ -666,8 +675,9 @@ send.addEventListener("click", async () => {
 
     $("pass").classList.add("stamped");
     if (out.wachtlijst){
-      $("stamp").textContent = "Wachtlijst";
-      $("vStatus").textContent = "Wachtlijst";
+      $("stamp").textContent = CONFIG.volStempel;
+      $("pass").classList.add("vol");
+      $("vStatus").textContent = "Fully booked";
       $("volTitel").textContent = CONFIG.wachtTitel;
       $("volTekst").textContent = CONFIG.wachtTekst;
       $("volBlok").style.display = "";
